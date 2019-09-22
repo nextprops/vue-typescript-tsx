@@ -1,0 +1,102 @@
+@import "../mixins/mixins.scss";
+// ruter
+a {
+	color: #333;
+}
+.router-link-active {
+	@include themify($themes) {
+		color: themed('font-color') !important;
+	}
+}
+
+// input
+.el-input__inner {
+	border-radius: 0 !important;
+	font-weight: 500;
+//   @include themify($themes) {
+// 		border-color: themed('font-color') !important;
+// 		background-color: themed('font-color') !important;
+// 		color: #fff;
+// 	}
+}
+
+.el-select {
+	.el-input__inner {
+	  @include themify($themes) {
+			border-color: themed('font-color') !important;
+			background-color: themed('font-color') !important;
+			color: #fff;
+		}
+	}
+}
+
+// button
+.el-button {
+	border-radius: 0 !important;
+	box-shadow: $--box-shadow-default;
+	&:hover {
+		box-shadow: $--box-shadow-hover;
+	}
+	&.el-button--primary {
+		@include themify($themes) {
+			background-color: themed('font-color') !important;
+			border-color: themed('font-color') !important;
+		}
+	}
+}
+
+// msg
+.el-message {
+	color: #fff;
+	border-radius: 0 !important;
+	box-shadow: $--box-shadow-default;
+	.el-message__icon {
+		font-size: 0.2rem;
+		display: none;
+	}
+	.el-message__content {
+		color: #fff !important;
+		font-weight: 500;
+	}
+}
+.el-message--success {
+	background-color: #4caf50!important;
+	border-color:#4caf50 !important;
+}
+.el-message--error {
+	background-color: #e91e63!important;
+	border-color:#e91e63 !important;
+}
+
+
+// select
+.el-select {
+	border-radius: 0 !important;
+	box-shadow: $--box-shadow-default;
+	&:hover {
+		box-shadow: $--box-shadow-hover;
+	}
+}
+
+.el-select-dropdown {
+	border-radius: 0 !important;
+}
+
+.el-select-dropdown__item.selected {
+	@include themify($themes) {
+		color: themed('font-color') !important;
+	}
+}
+
+// dialog
+.el-dialog {
+	width: 80% !important;
+}
+.el-dialog__header {
+	display: none;
+}
+
+.el-dialog__body {
+	min-width: 1rem;
+	padding: 0 !important;
+}
