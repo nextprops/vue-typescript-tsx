@@ -1,0 +1,311 @@
+@import "function";
+@import "../default/var.scss";
+/*
+伪类
+div {  
+  @include pseudo(last-of-type) {
+    color:red;
+  }
+}
+div:last-of-type {
+  color:red;
+}
+
+*/
+/*
+*/
+@mixin pseudo($pseudo) {
+  @at-root #{&}#{":#{$pseudo}"} {
+    @content;
+  }
+}
+
+@mixin css-triangle($color, $direction, $size: 6px, $position: absolute, $round: false) {
+  content: "";
+  position: $position;
+  width: 0;
+  height: 0;
+  @if $round {
+    border-radius: 3px;
+  }
+  @if $direction == down {
+    border-left: $size solid transparent;
+    border-right: $size solid transparent;
+    border-top: $size solid $color;
+    margin-top: 0 - round($size / 2.5);
+  } @else if $direction == up {
+    border-left: $size solid transparent;
+    border-right: $size solid transparent;
+    border-bottom: $size solid $color;
+    margin-bottom: 0 - round($size / 2.5);
+  } @else if $direction == right {
+    border-top: $size solid transparent;
+    border-bottom: $size solid transparent;
+    border-left: $size solid $color;
+    margin-right: -$size;
+  } @else if $direction == left {
+    border-top: $size solid transparent;
+    border-bottom: $size solid transparent;
+    border-right: $size solid $color;
+    margin-left: -$size;
+  }
+}
+/*
+超出隐藏
+*/
+@mixin truncate($truncation-boundary) {
+  max-width: $truncation-boundary;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/*
+BEM
+@include b(button) {
+  @include e(demo) {
+    @include m(loading) {
+
+    }
+  }
+}
+编译之后
+.vx-button__demo--loading {
+
+}
+
+*/
+@mixin b($block) {
+  $B: $namespace+"-"+$block !global;
+
+  .#{$B} {
+    @content;
+  }
+}
+
+@mixin e($element) {
+  $E: $element !global;
+  $selector: &;
+  $currentSelector: "";
+  @each $unit in $element {
+    $currentSelector: #{$currentSelector + "." + $B + $element-separator + $unit +
+      ","};
+  }
+
+  @if hitAllSpecialNestRule($selector) {
+    @at-root {
+      #{$selector} {
+        #{$currentSelector} {
+          @content;
+        }
+      }
+    }
+  } @else {
+    @at-root {
+      #{$currentSelector} {
+        @content;
+      }
+    }
+  }
+}
+
+@mixin m($modifier) {
+  $selector: &;
+  $currentSelector: "";
+  @each $unit in $modifier {
+    $currentSelector: #{$currentSelector + & + $modifier-separator + $unit + ","};
+  }
+
+  @at-root {
+    #{$currentSelector} {
+      @content;
+    }
+  }
+}
+
+
+@mixin themify($themes: $themes) {
+  @each $theme-name, $map in $themes {
+
+    .theme-#{$theme-name} & {
+      $theme-map: () !global;
+      @each $key, $value in $map {
+        $theme-map: map-merge($theme-map, ($key: $value)) !global;
+      }
+
+      @content;
+
+      $theme-map: null !global;
+    }
+  }
+}
+
+@function themed($key) {
+  @return map-get($theme-map, $key);
+}
+
+/*
+状态切换时使用  需要与区分BEM中的modifier 功能不一样  modifier中M始终始终保持某个状态
+div {
+  @include when(active) {
+    color:red
+  }
+}
+
+div.is-active {
+  color:red
+}
+*/
+@mixin when($state) {
+  @at-root {
+    &.#{$state-prefix + $state} {
+      @content;
+    }
+  }
+}
+
+@mixin css-table-cell($lineHeight, $cellPaddingTop, $cellPaddingLeft, $firstCellPadding) {
+  .cell {
+    padding: $cellPaddingTop $cellPaddingLeft;
+    line-height: $lineHeight;
+    white-space: nowrap;
+    height: 91px;
+    line-height: 91px;
+  }
+  &:first-child {
+    .cell {
+      padding-left: $firstCellPadding;
+    }
+  }
+}
+
+@mixin left-border($height, $color) {
+  font-size: $height;
+  color: $color;
+  border-left: solid 5px $color;
+  padding-left: 8px;
+  line-height: 1em;
+}
+
+@mixin keyframes($animation-name) {
+  @-webkit-keyframes #{$animation-name} {
+    @content;
+  }
+  @-moz-keyframes #{$animation-name} {
+    @content;
+  }
+  @keyframes #{$animation-name} {
+    @content;
+  }
+}
+
+@mixin animation($str) {
+  -webkit-animation: #{$str};
+}
+
+@mixin flexRowStart($justifyContent) {
+  display: flex;
+  flex-flow: row;
+  flex-wrap: nowrap;
+  justify-content: $justifyContent;
+  list-style: none;
+  align-items: flex-start;
+}
+@mixin flexRow($justifyContent) {
+  display: flex;
+  flex-flow: row;
+  flex-wrap: nowrap;
+  justify-content: $justifyContent;
+  list-style: none;
+  align-items: center;
+}
+
+@mixin flexColumn($justifyContent, $items) {
+  display: flex;
+  flex-flow: column;
+  flex-wrap: nowrap;
+  justify-content: $justifyContent;
+  list-style: none;
+  align-items: $items;
+}
+
+
+
+/*px转rem*/
+@mixin px2rem($property,$px,$px2:false,$px3:false,$px4:false){
+	$rem:75px;/* 设计稿尺寸/10 */
+  @if $px and $px2 and $px3 and $px4 {
+    #{$property}: ($px / $rem) + rem ($px2 / $rem) + rem ($px3 / $rem) + rem ($px4 / $rem) + rem;
+  }
+  @else if $px and $px2 {
+		#{$property}: ($px / $rem) + rem ($px2 / $rem) + rem;
+		//[data-model='pad'] & {#{$property}: ($px * 1.4 / $rem) + rem ($px2 * 1.4 / $rem) + rem;}
+	}
+	@else{
+		#{$property}: ($px / $rem) + rem!important;
+		//[data-model='pad'] & {#{$property}: ($px * 1.4 / $rem) + rem;}
+	}
+}
+
+/*根据dpr计算font-size*/
+@mixin font-dpr($font-size){
+	font-size: $font-size;
+	//[data-model="pad"] & { font-size: $font-size * 1.4; }
+	[data-dpr="2"] & { font-size: $font-size * 2;}
+	[data-dpr="3"] & { font-size: $font-size * 3;}
+}
+
+/*弹性盒属性*/
+%flexbox{
+	display: inline-flex;display: -webkit-flex;display: flex;
+}
+/*弹性盒比例*/
+@mixin flex($num:1){
+	-webkit-box-flex:$num;-moz-box-flex:$num;-webkit-flex:$num;-ms-flex:$num;flex:$num;
+}
+/*超行溢出显示省略号*/
+@mixin overflow($num:1,$fontSize:0,$lineHeight:1.5){
+  display: -webkit-box;-webkit-line-clamp:$num; overflow: hidden;
+  /*! autoprefixer: off */
+  -webkit-box-orient: vertical;
+  /* autoprefixer: on */
+  @if $fontSize!=0 and $lineHeight{/*高度需要撑开*/
+    line-height:$lineHeight;
+    @if $lineHeight < 1.2 {
+      line-height:1.2; /*最小需要1.2，否则在部分安卓机下第$num+1行会顶部漏出*/
+    }
+    height: $num * $fontSize * $lineHeight;
+    [data-dpr="2"] & { height: $num * $fontSize * $lineHeight * 2!important;}
+    [data-dpr="3"] & { height: $num * $fontSize * $lineHeight * 3!important;}
+  }
+}
+
+//transition兼容写法
+@mixin transition($content:all .2s){
+  -moz-transition: $content;
+  -webkit-transition: $content;
+  -o-transition: $content;
+  transition: $content;
+}
+//transfrom兼容
+@mixin translateX($num:-50%){
+  -ms-transform: translateX($num);
+  -moz-transform: translateX($num);
+  -webkit-transform: translateX($num);
+  -o-transform: translateX($num);
+  transform: translateX($num);
+}
+@mixin translateY($num:-50%){
+  -ms-transform: translateY($num);
+  -moz-transform: translateY($num);
+  -webkit-transform: translateY($num);
+  -o-transform: translateY($num);
+  transform: translateY($num);
+}
+@mixin rotate($deg:90deg){
+  -ms-transform:rotate($deg);
+  -moz-transform:rotate($deg);
+  -webkit-transform:rotate($deg);
+  -o-transform:rotate($deg);
+  transform:rotate($deg);
+}
