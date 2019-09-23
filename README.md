@@ -3,8 +3,8 @@
 
 <p align="center"><a href="https://www.laoge.mobi" target="_blank" rel="noopener noreferrer"><img width="100" src="https://vuejs.org/images/logo.png" alt="Vue logo"></a></p>
 
-
 ## 2019.9.18（更新）master分支为基础模板做了一些删减
+<h2><a href="https://gitee.com/fangshifu/vue-cli3">码云地址</a></h2>
 
 ## 概要
 > * 使用TypeScript + JSX + vue-class-component的组合方式。
@@ -14,9 +14,8 @@
 > * 仅提供学习与参考。
 
 
-## BLOG集成的小示例
-<a href="https://github.com/hedongxiaoshimei/laoge"><h2>BLOG地址</h2></a>
-
+<h2><a href="https://github.com/hedongxiaoshimei/laoge">BLOG集成的小示例</a></h2>
+## 概要
 - [x] 多语言
 - [x] 主题更换
 - [x] 右键菜单
