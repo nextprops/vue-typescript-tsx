@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@types/lodash": "^4.14.130",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "dayjs": "^1.8.14",
     "line-intersect": "^2.2.0",
     "lodash": "^4.17.11",
