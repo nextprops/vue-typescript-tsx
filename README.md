@@ -1,4 +1,15 @@
-## 2019.9.22（更新) 基础模板做了一些删减
+## 2021/4/7（更新) 附上粗糙的demo仓库 && 更新了一大波模型
+
+### 预览→  <a href="https://www.laoge.mobi">https://www.laoge.mobi</a>
+
+### repo→  <a href="https://gitee.com/fangshifu/laoge_demo">https://gitee.com/fangshifu/laoge_demo</a>
+
+### 请使用node v8.17
+
+
+---
+
+## 2019/9/22（更新) 基础模板做了一些删减
 
 <h2><a href="https://www.laoge.mobi">演示地址</a></h2>
 
@@ -337,7 +348,9 @@ export default class ComponentName extends Vue {
 } 
 ```
 
-# vue-cli3
+--- 
+
+# vue-cli3 请使用node v8.17
 
 ## Project setup
 ```
@@ -346,22 +359,22 @@ yarn
 
 ### Compiles and hot-reloads for development
 ```
-npm run dev
+yarn dev
 ```
 
 ### Compiles and minifies for production
 ```
-npm run build
+yarn build
 ```
 
 ### Run your tests
 ```
-npm run test
+yarn test
 ```
 
 ### Lints and fixes files
 ```
-npm run lint
+yarn lint
 ```
 
 ### Customize configuration
