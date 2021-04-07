@@ -11,7 +11,7 @@
 
 ## 2019/9/22（更新) 基础模板做了一些删减
 
-<h2><a href="https://www.laoge.mobi">演示地址</a></h2>
+---
 
 <p align="center"><a href="https://www.laoge.mobi" target="_blank" rel="noopener noreferrer"><img width="100" src="https://vuejs.org/images/logo.png" alt="Vue logo"></a></p>
 
