@@ -1,8 +1,5 @@
-## 2021/4/7（更新) 附上粗糙的demo仓库 && 更新了一大波模型
+## 2021/12/16（更新) 此项目停止更新，新项目计划 https://github.com/2v-design/2v-start-kit
 
-### 预览→  <a href="https://www.laoge.mobi">https://www.laoge.mobi</a>
-
-### repo→  <a href="https://gitee.com/fangshifu/laoge_demo">https://gitee.com/fangshifu/laoge_demo</a>
 
 ### 请使用node v8.17
 
