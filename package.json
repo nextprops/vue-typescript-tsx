@@ -45,7 +45,7 @@
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0-0",
     "file-save": "^0.2.0",
-    "node-sass": "^4.10.0",
+    "node-sass": "^7.0.0",
     "sass-loader": "^7.1.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
